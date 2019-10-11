@@ -1,9 +1,9 @@
 {
-    "status": "pass",
-    "tests": [
-        {
-            "name": "test_add",
-            "status": "pass"
-        }
-    ]
+  "status": "pass",
+  "tests": [
+    {
+      "name": "test_add",
+      "status": "pass"
+    }
+  ]
 }
