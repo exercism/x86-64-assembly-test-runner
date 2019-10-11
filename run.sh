@@ -4,8 +4,12 @@
 # $2 - A path to an input directory containing the submitted solution file(s) and the necessary test file(s) (with a trailing slash).
 # $3 - A path to an output directory (with a trailing slash).
 
-file=$(echo "$1" | sed 's/-/_/')
+cwd=$(pwd)
+test_file=$(echo "$1" | sed 's/-/_/')_test.c
 cd "$2" || exit
-sed -i 's#TEST_IGNORE();#// &#' "${file}"_test.c
+awk -F'[()]' '/RUN_TEST/ {print $2}' "${test_file}" > "$3"test_names.txt
+sed -i 's#TEST_IGNORE();#// &#' "${test_file}"
 make clean
-make
+stdbuf -oL make > "$3"results.txt 2>&1
+cd "${cwd}" || exit
+python3 process_results.py "$3"test_names.txt "$3"results.txt
