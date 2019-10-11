@@ -33,7 +33,7 @@ def process_results(filename, test_names):
 
 def write_output_file(filename, output):
     with open(filename, "w") as f:
-        f.write(json.dumps(output, indent=4) + "\n")
+        f.write(json.dumps(output, indent=2) + "\n")
 
 
 def main():
