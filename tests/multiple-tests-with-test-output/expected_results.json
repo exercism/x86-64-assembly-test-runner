@@ -1,0 +1,21 @@
+{
+  "status": "pass",
+  "message": null,
+  "tests": [
+    {
+      "name": "test_add",
+      "status": "pass",
+      "output": "test\n"
+    },
+    {
+      "name": "test_sub",
+      "status": "pass",
+      "output": "7\n3\n4\n"
+    },
+    {
+      "name": "test_mul",
+      "status": "pass",
+      "output": "FF\nFFFF\nFFFFFFFF\nFFFFFFFFFFFFFFFF\n"
+    }
+  ]
+}

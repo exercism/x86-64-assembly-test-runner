@@ -1,5 +1,5 @@
 {
-  "status": "fail",
-  "tests": [],
-  "message": "/usr/lib/gcc/x86_64-alpine-linux-musl/8.3.0/../../../../x86_64-alpine-linux-musl/bin/ld: fake_test.o: in function `test_add':\n/mnt/exercism-iteration/fake_test.c:14: undefined reference to `add'\ncollect2: error: ld returned 1 exit status\nmake: *** [Makefile:29: tests] Error 1\n"
+  "status": "error",
+  "message": "/usr/lib/gcc/x86_64-alpine-linux-musl/8.3.0/../../../../x86_64-alpine-linux-musl/bin/ld: fake_test.o: in function `test_add':\n/mnt/exercism-iteration/fake_test.c:14: undefined reference to `add'\ncollect2: error: ld returned 1 exit status\nmake: *** [Makefile:29: tests] Error 1\n",
+  "tests": []
 }

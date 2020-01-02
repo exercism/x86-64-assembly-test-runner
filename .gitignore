@@ -1,4 +1,5 @@
 **/*.o
 **/tests
+**/debug.asm
 !tests/
 output/
