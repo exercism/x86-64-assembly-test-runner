@@ -1,0 +1,34 @@
+---
+name: CI
+
+on:
+  push:
+    branches: 
+      - master
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '.gitignore'
+      - 'LICENSE'
+      - '**.md'
+
+jobs:
+  test:
+    name: Test Runner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build Docker Image
+        run: docker build -f Dockerfile -t x86-64-assembly-test-runner .
+        
+      - name: Run Tests
+        shell: bash
+        run: |
+          for testname in tests/*; do
+            echo "Running $testname..."
+            docker run --rm -v "$(pwd)"/"$testname":/mnt/exercism-iteration -v "$(pwd)"/output:/output x86-64-assembly-test-runner "fake" /mnt/exercism-iteration/ /output/
+            diff output/results.json "$testname"/expected_results.json
+            echo "OK"
+          done
