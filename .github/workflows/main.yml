@@ -21,14 +21,14 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Build Docker Image
-        run: docker build -f Dockerfile -t c-test-runner .
+        run: docker build -f Dockerfile -t x86-64-assembly-test-runner .
         
       - name: Run Tests
         shell: bash
         run: |
           for testname in tests/*; do
             echo "Running $testname..."
-            docker run --rm -v "$(pwd)"/"$testname":/mnt/exercism-iteration -v "$(pwd)"/output:/output c-test-runner "fake" /mnt/exercism-iteration/ /output/
+            docker run --rm -v "$(pwd)"/"$testname":/mnt/exercism-iteration -v "$(pwd)"/output:/output x86-64-assembly-test-runner "fake" /mnt/exercism-iteration/ /output/
             diff output/results.json "$testname"/expected_results.json
             echo "OK"
           done
