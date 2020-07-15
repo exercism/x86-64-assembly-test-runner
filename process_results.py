@@ -27,7 +27,6 @@ def process_results(filepath):
     output = {"status": "pass", "message": None, "tests": []}
     pattern = r"(?m)^((?P<file>.*test_.*\.c):\d+:(?P<name>\w+):(?P<status>PASS|FAIL)(?:: (?P<message>.*))?)$"
     text = filepath.read_text()
-    text = text[20:]
     for match in re.finditer(pattern, text):
         full_line, source_file, name, status, message = match.groups()
         case = {"name": name, "status": status.lower()}
