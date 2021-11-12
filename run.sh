@@ -5,7 +5,7 @@
 # $3 - A path to an output directory (with a trailing slash).
 
 cwd=$(pwd)
-test_file=$(echo "$1" | sed 's/-/_/')_test.c
+test_file=$(echo "$1" | sed 's/-/_/g')_test.c
 cp debug.asm "$2"
 cd "$2" || exit
 sed -i 's#TEST_IGNORE();#// &#' "${test_file}"
