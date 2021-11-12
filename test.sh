@@ -4,7 +4,7 @@ set -e
 
 cd "$(dirname "$0")"
 
-# docker build -t test-runner .
+docker build -t test-runner .
 
 for i in tests/*; do
     echo "Running $i..."
