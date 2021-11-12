@@ -4,11 +4,11 @@ set -e
 
 cd "$(dirname "$0")"
 
-docker build -t test-runner .
+# docker build -t test-runner .
 
 for i in tests/*; do
     echo "Running $i..."
-    docker run --rm -v "$(pwd)"/"$i":/mnt/exercism-iteration -v "$(pwd)"/output:/output test-runner "fake" /mnt/exercism-iteration/ /output/
+    docker run --rm -v "$(pwd)"/"$i":/mnt/exercism-iteration -v "$(pwd)"/output:/output test-runner "$(basename "$i")" /mnt/exercism-iteration/ /output/
     diff output/results.json "$i"/expected_results.json
     echo "OK"
 done
