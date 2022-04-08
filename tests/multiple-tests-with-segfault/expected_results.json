@@ -1,6 +1,7 @@
 {
+  "version": 2,
   "status": "error",
-  "message": "make: *** [Makefile:26: all] Segmentation fault (core dumped)\n",
+  "message": "make: *** [Makefile:26: all] Segmentation fault\n",
   "tests": [
     {
       "name": "test_add",
