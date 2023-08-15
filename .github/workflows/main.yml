@@ -1,34 +1,39 @@
----
 name: CI
 
 on:
-  push:
-    branches: 
-      - master
   pull_request:
     branches:
-      - master
+      - main
+  push:
+    branches:
+      - main
     paths-ignore:
-      - '.gitignore'
-      - 'LICENSE'
-      - '**.md'
+      - ".gitignore"
+      - "LICENSE"
+      - "**.md"
 
-jobs:
-  test:
-    name: Test Runner
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-
-      - name: Build Docker Image
-        run: docker build -f Dockerfile -t x86-64-assembly-test-runner .
-        
-      - name: Run Tests
-        shell: bash
-        run: |
-          for testname in tests/*; do
-            echo "Running $testname..."
-            docker run --rm -v "$(pwd)"/"$testname":/mnt/exercism-iteration -v "$(pwd)"/output:/output x86-64-assembly-test-runner "fake" /mnt/exercism-iteration/ /output/
-            diff output/results.json "$testname"/expected_results.json
-            echo "OK"
-          done
+      jobs:
+        build:
+          name: Tests
+          runs-on: ubuntu-22.04
+          steps:
+            - name: Checkout code
+              uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+      
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@2a1a44ac4aa01993040736bd95bb470da1a38365
+              with:
+                install: true
+      
+            - name: Build Docker image and store in cache
+              uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825
+              with:
+                context: .
+                push: false
+                load: true
+                tags: exercism/x86-64-assembly-test-runner
+                cache-from: type=gha
+                cache-to: type=gha,mode=max
+      
+            - name: Run Tests in Docker
+              run: bin/run-tests-in-docker.sh

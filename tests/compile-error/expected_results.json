@@ -1,6 +1,6 @@
 {
   "version": 2,
   "status": "error",
-  "message": "/usr/lib/gcc/x86_64-alpine-linux-musl/8.3.0/../../../../x86_64-alpine-linux-musl/bin/ld: compile_error_test.o: in function `test_add':\n/mnt/exercism-iteration/compile_error_test.c:14: undefined reference to `add'\ncollect2: error: ld returned 1 exit status\nmake: *** [Makefile:29: tests] Error 1\n",
+  "message": "/usr/lib/gcc/x86_64-alpine-linux-musl/8.3.0/../../../../x86_64-alpine-linux-musl/bin/ld: compile_error_test.o: in function `test_add':\n/opt/test-runner/tests/compile-error/compile_error_test.c:14: undefined reference to `add'\ncollect2: error: ld returned 1 exit status\nmake: *** [Makefile:29: tests] Error 1\n",
   "tests": []
 }
