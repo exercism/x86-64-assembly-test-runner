@@ -5,15 +5,18 @@
   "tests": [
     {
       "name": "test_add",
-      "status": "pass"
+      "status": "pass",
+      "task_id": 1
     },
     {
-      "name": "test_sub",
-      "status": "pass"
+      "name": "test_add_negative",
+      "status": "pass",
+      "task_id": 1
     },
     {
       "name": "test_mul",
-      "status": "pass"
+      "status": "pass",
+      "task_id": 2
     }
   ]
 }

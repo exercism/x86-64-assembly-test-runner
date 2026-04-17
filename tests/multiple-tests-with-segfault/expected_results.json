@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "status": "error",
   "message": "make: *** [Makefile:26: all] Segmentation fault (core dumped)\n",
   "tests": [

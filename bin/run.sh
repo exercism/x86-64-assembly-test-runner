@@ -33,4 +33,4 @@ cd "${solution_dir}" || exit
 sed -i 's#TEST_IGNORE();#// &#' "${test_file}"
 make clean
 stdbuf -oL make > "${output_dir}/results.out" 2>&1
-python3 "${cwd}"/process_results.py "${output_dir}/results.out"
+python3 "${cwd}"/process_results.py "${output_dir}/results.out" "${solution_dir}"
