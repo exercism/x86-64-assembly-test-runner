@@ -17,19 +17,43 @@ def get_last_test_name(filepath):
     return last_test_name[filepath]
 
 
+def build_task_map(test_file_path):
+    """Parse // TASK: N comments from a test .c file.
+
+    Returns a dict mapping test function names to task_id integers.
+    Returns an empty dict if no TASK annotations are found (practice exercises).
+    """
+    task_map = {}
+    current_task = None
+    task_re = re.compile(r"^//\s*TASK:\s*(\d+)")
+    func_re = re.compile(r"^void\s+(test_\w+)\s*\(")
+    for line in Path(test_file_path).read_text().splitlines():
+        m = task_re.match(line)
+        if m:
+            current_task = int(m.group(1))
+            continue
+        m = func_re.match(line)
+        if m and current_task is not None:
+            task_map[m.group(1)] = current_task
+    return task_map
+
+
 def truncate(text, maxlength=500):
     if len(text) > maxlength:
         text = f"{text[:maxlength]}\nOutput was truncated. Please limit to {maxlength} chars."
     return text
 
 
-def process_results(filepath):
-    output = {"version": 2, "status": "pass", "message": None, "tests": []}
+def process_results(filepath, task_map=None):
+    task_map = task_map or {}
+    output = {"version": 3, "status": "pass", "message": None, "tests": []}
     pattern = r"(?m)^((?P<file>.*_test\.c):\d+:(?P<name>\w+):(?P<status>PASS|FAIL)(?:: (?P<message>.*))?)$"
     text = filepath.read_text()
     for match in re.finditer(pattern, text):
         full_line, source_file, name, status, message = match.groups()
         case = {"name": name, "status": status.lower()}
+        if name in task_map:
+            case["task_id"] = task_map[name]
         if status == "FAIL":
             output["status"] = "fail"
         if message:
@@ -55,8 +79,11 @@ def write_output_file(filename, output):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("results_file", type=Path)
+    parser.add_argument("solution_dir", type=Path)
     args = parser.parse_args()
-    output = process_results(args.results_file)
+    test_files = list(args.solution_dir.glob("*_test.c"))
+    task_map = build_task_map(test_files[0]) if test_files else {}
+    output = process_results(args.results_file, task_map)
     output_file = args.results_file.with_suffix(".json")
     write_output_file(output_file, output)
 
