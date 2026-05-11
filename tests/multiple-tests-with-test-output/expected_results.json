@@ -6,17 +6,17 @@
     {
       "name": "test_add",
       "status": "pass",
-      "output": "test\n"
+      "output": "debug string... \"test\"\n"
     },
     {
       "name": "test_sub",
       "status": "pass",
-      "output": "7\n3\n4\n"
+      "output": "debug signed integer... 7\ndebug signed integer... 3\ndebug signed integer... 4\n"
     },
     {
       "name": "test_mul",
       "status": "pass",
-      "output": "FF\nFFFF\nFFFFFFFF\nFFFFFFFFFFFFFFFF\n"
+      "output": "debug hexadecimal... FF\ndebug hexadecimal... FFFF\ndebug hexadecimal... FFFFFFFF\ndebug hexadecimal... FFFFFFFFFFFFFFFF\n"
     }
   ]
 }

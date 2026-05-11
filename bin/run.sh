@@ -28,7 +28,7 @@ results_file="${output_dir}/results.json"
 
 cwd=$(pwd)
 test_file=$(echo "${slug}" | sed 's/-/_/g')_test.c
-cp debug.asm "${solution_dir}"
+cp debug.mac "${solution_dir}"
 cd "${solution_dir}" || exit
 sed -i 's#TEST_IGNORE();#// &#' "${test_file}"
 make clean
