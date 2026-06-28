@@ -1,4 +1,4 @@
-FROM alpine:3.18.3
+FROM alpine:3.23.5
 RUN apk add --no-cache coreutils gcc libc-dev make nasm python3
 WORKDIR /opt/test-runner
 COPY bin/run.sh bin/
